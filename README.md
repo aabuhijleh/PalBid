@@ -9,9 +9,7 @@ A streamlined bidding platform connecting buyers and sellers in Palestine, enabl
 
 ## Project Structure
 
-This is a monorepo built with [Turborepo](https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces) containing multiple packages and apps working in harmony.
-
-This monorepo includes the following packages and apps:
+This is a monorepo built with [Turborepo](https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces) containing the following apps and packages:
 
 ### Apps
 
