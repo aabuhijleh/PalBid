@@ -1,0 +1,42 @@
+{
+  "name": "api",
+  "prisma": {
+    "schema": "src/database/prisma/schema.prisma",
+    "seed": "tsx src/database/seed.ts"
+  },
+  "scripts": {
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:seed": "tsx src/database/seed.ts",
+    "format": "prisma format",
+    "generate": "prisma generate",
+    "prebuild": "pnpm generate",
+    "predev": "pnpm generate",
+    "studio": "prisma studio",
+    "start": "node dist/index.js",
+    "dev": "tsup --watch --onSuccess \"node dist/index.js\"",
+    "build": "tsup",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@hono/zod-validator": "^0.4.2",
+    "@prisma/client": "^6.0.1",
+    "@types/dotenv-safe": "^8.1.6",
+    "dotenv-safe": "^9.1.0",
+    "hono": "^4.6.13",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.11.24",
+    "prisma": "^6.0.1",
+    "tsup": "^8.0.2",
+    "tsx": "^4.19.2",
+    "typescript": "5.5.4"
+  }
+}
