@@ -20,7 +20,7 @@ This monorepo includes the following packages and apps:
 
 ### Packages
 
-- `@repo/eslint-config`: ESLint configurations
+- `@repo/eslint-config`: [ESLint](https://eslint.org/) configurations
 - `@repo/typescript-config`: Shared `tsconfig.json`s used throughout the monorepo
 
 ## Getting Started
@@ -28,17 +28,17 @@ This monorepo includes the following packages and apps:
 1. Install dependencies:
 
    ```sh
-   pnpm install
+    pnpm install
    ```
 
 2. Set up environment variables:
 
    ```sh
-   # In apps/web
-   cp .env.example .env
+    # In apps/web
+    cp .env.example .env
 
-   # In apps/api
-   cp .env.example .env
+    # In apps/api
+    cp .env.example .env
    ```
 
 3. Set up the database:
@@ -47,17 +47,17 @@ This monorepo includes the following packages and apps:
     # Run migrations
     pnpm db:migrate:dev
 
-   # Push database changes
-   pnpm db:push
+    # Push database changes
+    pnpm db:push
 
-   # Seed the database (optional)
-   pnpm db:seed
+    # Seed the database (optional)
+    pnpm db:seed
    ```
 
 4. Start the development server:
 
    ```sh
-   pnpm dev
+    pnpm dev
    ```
 
 ## Useful Commands
