@@ -7,7 +7,7 @@ const DEFAULT_USERS = [
     name: "Tim Apple",
     email: "tim@apple.com",
   },
-] as Partial<User>[];
+] as (Partial<User> & { email: string })[];
 
 void (async () => {
   try {
@@ -15,7 +15,7 @@ void (async () => {
       DEFAULT_USERS.map((user) =>
         prisma.user.upsert({
           where: {
-            email: user.email!,
+            email: user.email,
           },
           update: {
             ...user,

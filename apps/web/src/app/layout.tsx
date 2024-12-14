@@ -1,6 +1,5 @@
-import "./styles.css";
-
 import type { JSX } from "react";
+import "./styles.css";
 
 export default function RootLayout({
   children,
