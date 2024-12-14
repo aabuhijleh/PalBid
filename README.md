@@ -1,40 +1,71 @@
 # PalBid
 
-This is an official starter Turborepo with multiple meta-frameworks all working in harmony and sharing packages.
+A streamlined bidding platform connecting buyers and sellers in Palestine, enabling transparent and efficient transactions.
 
-This example also shows how to use [Workspace Configurations](https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces).
+## Prerequisites
 
-## Using this example
+- Node.js >= 18
+- [pnpm](https://pnpm.io) >= 8
 
-Run the following command:
+## Project Structure
+
+This is a monorepo built with [Turborepo](https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces) containing multiple packages and apps working in harmony.
+
+This monorepo includes the following packages and apps:
+
+### Apps
+
+- `web`: a [Next.js](https://nextjs.org/) app
+- `api`: a [Hono](https://hono.dev/) server with a [PostgreSQL](https://www.postgresql.org/) database and [Prisma](https://www.prisma.io/) as the ORM
+
+### Packages
+
+- `@repo/eslint-config`: ESLint configurations
+- `@repo/typescript-config`: Shared `tsconfig.json`s used throughout the monorepo
+
+## Getting Started
+
+1. Install dependencies:
+
+   ```sh
+   pnpm install
+   ```
+
+2. Set up environment variables:
+
+   ```sh
+   # In apps/web
+   cp .env.example .env
+
+   # In apps/api
+   cp .env.example .env
+   ```
+
+3. Set up the database:
+
+   ```sh
+    # Run migrations
+    pnpm db:migrate:dev
+
+   # Push database changes
+   pnpm db:push
+
+   # Seed the database (optional)
+   pnpm db:seed
+   ```
+
+4. Start the development server:
+
+   ```sh
+   pnpm dev
+   ```
+
+## Useful Commands
 
 ```sh
-npx create-turbo@latest -e kitchen-sink
+pnpm build      # Build all apps and packages for production
+pnpm dev        # Start all apps in development mode
+pnpm lint       # Lint all apps and packages
+pnpm format     # Format all apps and packages
+pnpm typecheck  # Run type checking
 ```
-
-## What's inside?
-
-This Turborepo includes the following packages and apps:
-
-### Apps and Packages
-
-- `api`: an [Express](https://expressjs.com/) server
-- `storefront`: a [Next.js](https://nextjs.org/) app
-- `admin`: a [Vite](https://vitejs.dev/) single page app
-- `blog`: a [Remix](https://remix.run/) blog
-- `@repo/eslint-config`: ESLint configurations used throughout the monorepo
-- `@repo/jest-presets`: Jest configurations
-- `@repo/logger`: isomorphic logger (a small wrapper around console.log)
-- `@repo/ui`: a dummy React UI library (which contains `<CounterButton>` and `<Link>` components)
-- `@repo/typescript-config`: tsconfig.json's used throughout the monorepo
-
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
