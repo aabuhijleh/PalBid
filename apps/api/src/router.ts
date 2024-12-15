@@ -28,7 +28,7 @@ export const createRouter = () => {
       cookieOptions: {
         path: "/",
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "none",
         secure: !env.DEVELOPMENT,
       },
     }),
