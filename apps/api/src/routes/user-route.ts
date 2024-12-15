@@ -4,6 +4,7 @@ import { setCookie, deleteCookie } from "hono/cookie";
 import type { Session } from "hono-sessions";
 import { CookieStore, sessionMiddleware } from "hono-sessions";
 import { createMiddleware } from "hono/factory";
+import { env } from "../config/env";
 import { prisma } from "../database/client";
 
 interface SessionDataTypes {
@@ -23,7 +24,7 @@ app.use(
   "*",
   sessionMiddleware({
     store,
-    encryptionKey: process.env.SESSION_ENCRYPTION_KEY,
+    encryptionKey: env.SESSION_ENCRYPTION_KEY,
     expireAfterSeconds: 900,
     cookieOptions: {
       path: "/",
@@ -76,8 +77,8 @@ export const userRoute = app
   .get(
     "/sign-in",
     googleAuth({
-      client_id: process.env.GOOGLE_CLIENT_ID!,
-      client_secret: process.env.GOOGLE_CLIENT_SECRET!,
+      client_id: env.GOOGLE_CLIENT_ID,
+      client_secret: env.GOOGLE_CLIENT_SECRET,
       scope: ["openid", "email", "profile"],
     }),
     async (c) => {
@@ -110,11 +111,11 @@ export const userRoute = app
       const session = c.get("session");
       session.set("userId", user.id);
       setCookie(c, "currentUserId", user.id);
-      return c.redirect(process.env.WEB_URL!);
+      return c.redirect(env.WEB_URL);
     },
   )
   .post("/sign-out", (c) => {
     c.get("session").deleteSession();
     deleteCookie(c, "currentUserId");
-    return c.redirect(process.env.WEB_URL!);
+    return c.redirect(env.WEB_URL);
   });

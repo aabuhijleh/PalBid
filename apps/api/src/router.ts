@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
+import { env } from "./config/env";
 import { userRoute } from "./routes/user-route";
 
 export const createRouter = () => {
@@ -10,7 +11,7 @@ export const createRouter = () => {
   app.use(
     "*",
     cors({
-      origin: [process.env.WEB_URL!],
+      origin: [env.WEB_URL],
       credentials: true,
     }),
   );

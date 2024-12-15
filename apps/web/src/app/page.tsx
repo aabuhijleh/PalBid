@@ -1,4 +1,6 @@
+import { env } from "#/config/env";
 import { getMe } from "#/lib/client";
+import { joinUrl } from "#/lib/url-utils";
 
 export default async function IndexPage() {
   const currentUser = await getMe();
@@ -9,11 +11,17 @@ export default async function IndexPage() {
       <pre>{JSON.stringify(currentUser, null, 2)}</pre>
 
       {currentUser ? (
-        <form action="http://localhost:4000/users/sign-out" method="POST">
+        <form
+          action={joinUrl(env.NEXT_PUBLIC_API_URL, "/users/sign-out")}
+          method="POST"
+        >
           <input type="submit" value="Sign out" />
         </form>
       ) : (
-        <form action="http://localhost:4000/users/sign-in" method="GET">
+        <form
+          action={joinUrl(env.NEXT_PUBLIC_API_URL, "/users/sign-in")}
+          method="GET"
+        >
           <input type="submit" value="Sign in" />
         </form>
       )}
