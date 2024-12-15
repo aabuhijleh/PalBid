@@ -34,6 +34,16 @@ export const userRoute = app
       200,
     );
   })
+  .get("/test", (c) => {
+    setCookie(c, "testCookie", "this is a test", {
+      path: "/",
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+
+    return c.text("done", 200);
+  })
   .get(
     "/sign-in",
     googleAuth({

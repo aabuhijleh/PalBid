@@ -11,6 +11,8 @@ export const createRouter = () => {
   const app = new Hono<ServerContext>();
   const store = new RedisStore();
 
+  console.log("env.WEB_URL", env.WEB_URL);
+
   app.use(logger());
   app.use(
     "*",
@@ -30,6 +32,7 @@ export const createRouter = () => {
         httpOnly: true,
         sameSite: "None",
         secure: true,
+        maxAge: 86400,
       },
     }),
   );
