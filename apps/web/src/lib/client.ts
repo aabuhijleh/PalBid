@@ -6,20 +6,22 @@ import type { AppType } from "api/src";
 
 export const client = hc<AppType>(process.env.NEXT_PUBLIC_API_URL!);
 
-export async function getUsers() {
+export async function getMe() {
   const cookieStore = await cookies();
   const cookiesString = cookieStore.toString();
-  console.log("cookies !!!", cookiesString);
 
   try {
-    const res = await client.users.$get(undefined, {
+    const res = await client.users.me.$get(undefined, {
       headers: {
         ...(cookiesString ? { Cookie: cookiesString } : {}),
       },
     });
+    if (!res.ok) {
+      return null;
+    }
     return res.json();
   } catch (error) {
-    console.error("Could not fetch users", error);
-    return [];
+    console.error("Could not fetch current user", error);
+    return null;
   }
 }

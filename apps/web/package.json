@@ -1,5 +1,11 @@
 {
   "name": "web",
+  "imports": {
+    "#*": [
+      "./src/*.ts",
+      "./src/*.tsx"
+    ]
+  },
   "scripts": {
     "build": "next build",
     "clean": "rm -rf .next",
@@ -12,7 +18,6 @@
     "api": "workspace:*",
     "hono": "^4.6.13",
     "next": "15.1.0",
-    "next-auth": "^4.24.11",
     "react": "19.0.0",
     "react-dom": "19.0.0"
   },

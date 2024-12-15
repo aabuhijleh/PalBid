@@ -4,6 +4,11 @@
     "schema": "src/database/prisma/schema.prisma",
     "seed": "tsx src/database/seed.ts"
   },
+  "imports": {
+    "#*": [
+      "./src/*.ts"
+    ]
+  },
   "scripts": {
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
@@ -28,7 +33,6 @@
     "@prisma/client": "^6.0.1",
     "@types/dotenv-safe": "^8.1.6",
     "dotenv-safe": "^9.1.0",
-    "google-auth-library": "^9.15.0",
     "hono": "^4.6.13",
     "hono-sessions": "^0.7.0",
     "zod": "^3.24.1"

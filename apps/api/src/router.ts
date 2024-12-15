@@ -10,7 +10,7 @@ export const createRouter = () => {
   app.use(
     "*",
     cors({
-      origin: ["http://localhost:3000", "http://localhost:4000"],
+      origin: [process.env.WEB_URL!],
       credentials: true,
     }),
   );

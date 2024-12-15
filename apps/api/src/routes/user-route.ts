@@ -1,16 +1,6 @@
-import type { Context } from "hono";
 import { Hono } from "hono";
-import { z } from "zod";
-import { zValidator } from "@hono/zod-validator";
-import { OAuth2Client } from "google-auth-library";
 import { googleAuth } from "@hono/oauth-providers/google";
-import {
-  getCookie,
-  getSignedCookie,
-  setCookie,
-  setSignedCookie,
-  deleteCookie,
-} from "hono/cookie";
+import { setCookie, deleteCookie } from "hono/cookie";
 import type { Session } from "hono-sessions";
 import { CookieStore, sessionMiddleware } from "hono-sessions";
 import { createMiddleware } from "hono/factory";
@@ -26,8 +16,6 @@ const app = new Hono<{
     session_key_rotation: boolean;
   };
 }>();
-
-const googleAuthClient = new OAuth2Client();
 
 const store = new CookieStore();
 
@@ -62,65 +50,29 @@ const authMiddleware = createMiddleware<{
 });
 
 export const userRoute = app
-  .get("/", authMiddleware, async (c) => {
-    // const users = await prisma.user.findMany();
+  .get("/me", authMiddleware, async (c) => {
     const session = c.get("session");
-
     const userId = session.get("userId");
-
-    const userIdFromCookie = getCookie(c, "test") || null;
-
-    // return c.json(users, 200);
-
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId!,
+      },
+    });
+    if (!user) {
+      return c.json(
+        {
+          message: "User not found",
+        },
+        404,
+      );
+    }
     return c.json(
       {
-        session,
-        userId,
-        userIdFromCookie,
+        user,
       },
       200,
     );
   })
-  .post(
-    "/sign-in-deprecated",
-    zValidator(
-      "json",
-      z.object({
-        token: z.string(),
-        email: z.string(),
-        name: z.string().optional(),
-        avatar: z.string().optional(),
-      }),
-    ),
-    async (c) => {
-      const { token, email, name, avatar } = c.req.valid("json");
-      try {
-        await googleAuthClient.verifyIdToken({
-          idToken: token,
-          audience: process.env.GOOGLE_CLIENT_ID!,
-        });
-      } catch (error) {
-        console.error("Failed to verify Google ID token", error);
-        return c.json({ message: "Invalid Google ID token" }, 401);
-      }
-      const user = await prisma.user.upsert({
-        where: {
-          email,
-        },
-        create: {
-          email,
-          name,
-          avatar,
-        },
-        update: {
-          name,
-          avatar,
-        },
-      });
-
-      return c.json(user, 201);
-    },
-  )
   .get(
     "/sign-in",
     googleAuth({
@@ -155,19 +107,14 @@ export const userRoute = app
           avatar,
         },
       });
-
-      console.log("user !!!", user);
-
       const session = c.get("session");
-
       session.set("userId", user.id);
-
-      setCookie(c, "test", user.id);
-
-      return c.redirect("http://localhost:3000");
+      setCookie(c, "currentUserId", user.id);
+      return c.redirect(process.env.WEB_URL!);
     },
   )
-  .get("/sign-out", (c) => {
+  .post("/sign-out", (c) => {
     c.get("session").deleteSession();
-    return c.redirect("http://localhost:3000");
+    deleteCookie(c, "currentUserId");
+    return c.redirect(process.env.WEB_URL!);
   });
