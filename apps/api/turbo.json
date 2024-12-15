@@ -3,7 +3,13 @@
   "tasks": {
     "build": {
       "outputs": ["dist/**"],
-      "env": ["PORT", "GOOGLE_CLIENT_ID"]
+      "env": [
+        "PORT",
+        "DATABASE_URL",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "SESSION_ENCRYPTION_KEY"
+      ]
     }
   }
 }
