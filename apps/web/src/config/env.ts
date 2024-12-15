@@ -5,5 +5,5 @@ const vars = from({
 });
 
 export const env = {
-  NEXT_PUBLIC_API_URL: vars.get("NEXT_PUBLIC_API_URL").required().asUrlString(),
+  NEXT_PUBLIC_API_URL: vars.get("NEXT_PUBLIC_API_URL").required().asString(),
 };
