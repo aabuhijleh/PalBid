@@ -4,11 +4,6 @@
     "schema": "src/database/prisma/schema.prisma",
     "seed": "tsx src/database/seed.ts"
   },
-  "imports": {
-    "#*": [
-      "./src/*.ts"
-    ]
-  },
   "scripts": {
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",

@@ -1,54 +1,12 @@
 import { Hono } from "hono";
 import { googleAuth } from "@hono/oauth-providers/google";
 import { setCookie, deleteCookie } from "hono/cookie";
-import type { Session } from "hono-sessions";
-import { CookieStore, sessionMiddleware } from "hono-sessions";
-import { createMiddleware } from "hono/factory";
+import type { ServerContext } from "../types/server";
 import { env } from "../config/env";
 import { prisma } from "../database/client";
+import { authMiddleware } from "../middleware/auth";
 
-interface SessionDataTypes {
-  userId: string;
-}
-
-const app = new Hono<{
-  Variables: {
-    session: Session<SessionDataTypes>;
-    session_key_rotation: boolean;
-  };
-}>();
-
-const store = new CookieStore();
-
-app.use(
-  "*",
-  sessionMiddleware({
-    store,
-    encryptionKey: env.SESSION_ENCRYPTION_KEY,
-    expireAfterSeconds: 900,
-    cookieOptions: {
-      path: "/",
-      httpOnly: true,
-    },
-  }),
-);
-
-const authMiddleware = createMiddleware<{
-  Variables: {
-    session: Session<SessionDataTypes>;
-    session_key_rotation: boolean;
-  };
-}>(async (c, next) => {
-  const session = c.get("session");
-  const userId = session.get("userId");
-  const isAuthenticated = Boolean(userId);
-
-  if (!isAuthenticated) {
-    return c.json({ message: "Unauthorized" }, 401);
-  }
-
-  await next();
-});
+const app = new Hono<ServerContext>();
 
 export const userRoute = app
   .get("/me", authMiddleware, async (c) => {
@@ -82,11 +40,7 @@ export const userRoute = app
       scope: ["openid", "email", "profile"],
     }),
     async (c) => {
-      const token = c.get("token");
       const googleUser = c.get("user-google");
-
-      console.log("token !!!", token);
-      console.log("googleUser !!!", googleUser);
 
       if (!googleUser?.email) {
         throw new Error("Google user not found");

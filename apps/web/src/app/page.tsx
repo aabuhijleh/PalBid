@@ -1,6 +1,6 @@
 import { env } from "#/config/env";
-import { getMe } from "#/lib/client";
 import { joinUrl } from "#/lib/url-utils";
+import { getMe } from "#/lib/client";
 
 export default async function IndexPage() {
   const currentUser = await getMe();
