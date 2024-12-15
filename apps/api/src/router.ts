@@ -24,10 +24,12 @@ export const createRouter = () => {
     sessionMiddleware({
       store,
       encryptionKey: env.SESSION_ENCRYPTION_KEY,
-      expireAfterSeconds: 900,
+      expireAfterSeconds: 86400,
       cookieOptions: {
         path: "/",
         httpOnly: true,
+        sameSite: "lax",
+        secure: env.NODE_ENV === "production",
       },
     }),
   );

@@ -4,6 +4,7 @@
     "build": {
       "outputs": ["dist/**"],
       "env": [
+        "NODE_ENV",
         "PORT",
         "WEB_URL",
         "DATABASE_URL",
