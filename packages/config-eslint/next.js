@@ -1,4 +1,5 @@
 const { resolve } = require("node:path");
+const commonRules = require("./common-rules");
 
 const project = resolve(process.cwd(), "tsconfig.json");
 
@@ -40,10 +41,6 @@ module.exports = {
   ignorePatterns: [".*.js", "node_modules/", "dist/"],
   // add rules configurations here
   rules: {
-    "import/no-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "no-console": "off",
-    "@typescript-eslint/no-explicit-any": "off",
+    ...commonRules,
   },
 };
