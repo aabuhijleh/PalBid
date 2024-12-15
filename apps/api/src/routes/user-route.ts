@@ -38,6 +38,7 @@ export const userRoute = app
       client_id: env.GOOGLE_CLIENT_ID,
       client_secret: env.GOOGLE_CLIENT_SECRET,
       scope: ["email", "profile", "openid"],
+      redirect_uri: new URL("/users/sign-in", env.API_URL).href,
     }),
     async (c) => {
       const googleUser = c.get("user-google");

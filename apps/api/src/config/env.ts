@@ -6,6 +6,7 @@ config();
 export const env = {
   DEVELOPMENT: get("DEVELOPMENT").default("false").asBool(),
   PORT: get("PORT").default("4000").asPortNumber(),
+  API_URL: get("API_URL").required().asUrlString(),
   WEB_URL: get("WEB_URL").required().asUrlString(),
   DATABASE_URL: get("DATABASE_URL").required().asUrlString(),
   REDIS_URL: get("REDIS_URL").required().asUrlString(),

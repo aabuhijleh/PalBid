@@ -1,5 +1,4 @@
 import { env } from "#/config/env";
-import { joinUrl } from "#/lib/url-utils";
 import { getMe } from "#/lib/client";
 
 export default async function IndexPage() {
@@ -12,14 +11,14 @@ export default async function IndexPage() {
 
       {currentUser ? (
         <form
-          action={joinUrl(env.NEXT_PUBLIC_API_URL, "/users/sign-out")}
+          action={new URL("/users/sign-out", env.NEXT_PUBLIC_API_URL).href}
           method="POST"
         >
           <input type="submit" value="Sign out" />
         </form>
       ) : (
         <form
-          action={joinUrl(env.NEXT_PUBLIC_API_URL, "/users/sign-in")}
+          action={new URL("/users/sign-in", env.NEXT_PUBLIC_API_URL).href}
           method="GET"
         >
           <input type="submit" value="Sign in" />
