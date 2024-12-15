@@ -29,7 +29,7 @@ export const createRouter = () => {
         path: "/",
         httpOnly: true,
         sameSite: "lax",
-        secure: env.NODE_ENV === "production",
+        secure: !env.DEVELOPMENT,
       },
     }),
   );
