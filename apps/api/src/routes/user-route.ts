@@ -17,6 +17,8 @@ export const userRoute = app
         id: userId!,
       },
     });
+    setCookie(c, "test", "testing");
+
     if (!user) {
       return c.json(
         {
@@ -65,12 +67,22 @@ export const userRoute = app
       });
       const session = c.get("session");
       session.set("userId", user.id);
-      setCookie(c, "currentUserId", user.id);
+      setCookie(c, "currentUserId", user.id, {
+        path: "/",
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+      });
       return c.redirect(env.WEB_URL);
     },
   )
   .post("/sign-out", (c) => {
     c.get("session").deleteSession();
-    deleteCookie(c, "currentUserId");
+    deleteCookie(c, "currentUserId", {
+      path: "/",
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
     return c.redirect(env.WEB_URL);
   });
