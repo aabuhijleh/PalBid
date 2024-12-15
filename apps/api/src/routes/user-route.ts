@@ -37,7 +37,7 @@ export const userRoute = app
     googleAuth({
       client_id: env.GOOGLE_CLIENT_ID,
       client_secret: env.GOOGLE_CLIENT_SECRET,
-      scope: ["openid", "email", "profile"],
+      scope: ["email", "profile", "openid"],
     }),
     async (c) => {
       const googleUser = c.get("user-google");
