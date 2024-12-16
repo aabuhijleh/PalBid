@@ -6,6 +6,7 @@ import { env } from "./config/env";
 import { userRoute } from "./routes/user-route";
 import { RedisStore } from "./lib/session-store";
 import type { ServerContext } from "./types/server";
+import { cookieOptions } from "./config/cookie";
 
 export const createRouter = () => {
   const app = new Hono<ServerContext>();
@@ -25,20 +26,13 @@ export const createRouter = () => {
       store,
       encryptionKey: env.SESSION_ENCRYPTION_KEY,
       expireAfterSeconds: 86400,
-      cookieOptions: {
-        path: "/",
-        httpOnly: true,
-        sameSite: "None",
-        secure: true,
-        maxAge: 86400,
-        domain: env.COOKIE_DOMAIN,
-      },
+      cookieOptions,
     }),
   );
 
   const router = app
     .get("/", (c) => {
-      return c.text("Hello from PalBid API service 👋");
+      return c.text("Hello from PalBid API service 👋", 200);
     })
     .route("/users", userRoute);
 

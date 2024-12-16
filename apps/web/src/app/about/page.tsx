@@ -17,14 +17,6 @@ export default function IndexPage() {
       });
   }, []);
 
-  useEffect(() => {
-    void fetch(new URL("/users/test", env.NEXT_PUBLIC_API_URL).href).catch(
-      (err) => {
-        console.error("failed test", err);
-      },
-    );
-  }, []);
-
   return (
     <div>
       <h1>Current user</h1>

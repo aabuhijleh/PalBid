@@ -5,6 +5,7 @@ import type { ServerContext } from "../types/server";
 import { env } from "../config/env";
 import { prisma } from "../database/client";
 import { authMiddleware } from "../middleware/auth";
+import { cookieOptions } from "../config/cookie";
 
 const app = new Hono<ServerContext>();
 
@@ -17,8 +18,6 @@ export const userRoute = app
         id: userId!,
       },
     });
-    setCookie(c, "test", "testing");
-
     if (!user) {
       return c.json(
         {
@@ -33,16 +32,6 @@ export const userRoute = app
       },
       200,
     );
-  })
-  .get("/test", (c) => {
-    setCookie(c, "testCookie", "this is a test", {
-      path: "/",
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-    });
-
-    return c.text("done", 200);
   })
   .get(
     "/sign-in",
@@ -77,22 +66,12 @@ export const userRoute = app
       });
       const session = c.get("session");
       session.set("userId", user.id);
-      setCookie(c, "currentUserId", user.id, {
-        path: "/",
-        httpOnly: true,
-        sameSite: "None",
-        secure: true,
-      });
+      setCookie(c, "currentUserId", user.id, cookieOptions);
       return c.redirect(env.WEB_URL);
     },
   )
   .post("/sign-out", (c) => {
     c.get("session").deleteSession();
-    deleteCookie(c, "currentUserId", {
-      path: "/",
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-    });
+    deleteCookie(c, "currentUserId", cookieOptions);
     return c.redirect(env.WEB_URL);
   });
