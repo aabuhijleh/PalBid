@@ -33,6 +33,7 @@ export const createRouter = () => {
         sameSite: "None",
         secure: true,
         maxAge: 86400,
+        domain: env.COOKIE_DOMAIN,
       },
     }),
   );

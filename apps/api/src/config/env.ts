@@ -13,4 +13,5 @@ export const env = {
   GOOGLE_CLIENT_ID: get("GOOGLE_CLIENT_ID").required().asString(),
   GOOGLE_CLIENT_SECRET: get("GOOGLE_CLIENT_SECRET").required().asString(),
   SESSION_ENCRYPTION_KEY: get("SESSION_ENCRYPTION_KEY").required().asString(),
+  COOKIE_DOMAIN: get("COOKIE_DOMAIN").required().asString(),
 };
