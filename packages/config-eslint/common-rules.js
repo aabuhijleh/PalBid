@@ -5,6 +5,7 @@ const commonRules = {
   "@typescript-eslint/no-non-null-assertion": "off",
   "@typescript-eslint/no-explicit-any": "off",
   "no-console": "off",
+  "no-promise-executor-return": "off",
 };
 
 module.exports = commonRules;
