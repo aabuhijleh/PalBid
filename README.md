@@ -43,6 +43,7 @@ This is a monorepo built with [Turborepo](https://turbo.build/repo/docs/core-con
 
    ```sh
     # Run migrations
+    # You may need to cd to `apps/api` first
     pnpm db:migrate:dev
 
     # Push database changes
