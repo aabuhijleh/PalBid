@@ -4,7 +4,7 @@ A streamlined bidding platform connecting buyers and sellers in Palestine, enabl
 
 ## Prerequisites
 
-- Node.js >= 18
+- Node.js >= 20
 - [pnpm](https://pnpm.io) >= 8
 
 ## Project Structure
@@ -43,7 +43,6 @@ This is a monorepo built with [Turborepo](https://turbo.build/repo/docs/core-con
 
    ```sh
     # Run migrations
-    # You may need to cd to `apps/api` first
     pnpm db:migrate:dev
 
     # Push database changes
@@ -67,4 +66,5 @@ pnpm dev        # Start all apps in development mode
 pnpm lint       # Lint all apps and packages
 pnpm format     # Format all apps and packages
 pnpm typecheck  # Run type checking
+pnpm studio     # Open Prisma Studio
 ```

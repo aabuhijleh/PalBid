@@ -2,33 +2,17 @@ import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
 import { sessionMiddleware } from "hono-sessions";
-import { env } from "./config/env";
-import { userRoute } from "./routes/user-route";
-import { RedisStore } from "./lib/session-store";
+import { corsOptions } from "./config/cors";
+import { sessionOptions } from "./config/session";
 import type { ServerContext } from "./types/server";
-import { cookieOptions } from "./config/cookie";
+import { userRoute } from "./routes/user-route";
 
 export const createRouter = () => {
   const app = new Hono<ServerContext>();
-  const store = new RedisStore();
 
   app.use(logger());
-  app.use(
-    "*",
-    cors({
-      origin: [env.WEB_URL],
-      credentials: true,
-    }),
-  );
-  app.use(
-    "*",
-    sessionMiddleware({
-      store,
-      encryptionKey: env.SESSION_ENCRYPTION_KEY,
-      expireAfterSeconds: 86400,
-      cookieOptions,
-    }),
-  );
+  app.use("*", cors(corsOptions));
+  app.use("*", sessionMiddleware(sessionOptions));
 
   const router = app
     .get("/", (c) => {

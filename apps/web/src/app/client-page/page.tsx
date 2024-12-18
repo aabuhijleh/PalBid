@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { env } from "#/config/env";
-import { getMe } from "#/lib/client";
+import { getMe } from "#/lib/queries";
 import { Submit } from "#/components/submit";
 
-export default function IndexPage() {
+export default function ClientPage() {
   const [currentUser, setCurrentUser] = useState<Awaited<
     ReturnType<typeof getMe>
   > | null>(null);

@@ -1,5 +1,5 @@
 import { env } from "#/config/env";
-import { getMe } from "#/lib/client";
+import { getMe } from "#/lib/queries";
 import { Submit } from "#/components/submit";
 
 export default async function IndexPage() {

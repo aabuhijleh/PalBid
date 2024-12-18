@@ -1,5 +1,6 @@
 import type { Store, SessionData } from "hono-sessions";
 import type { Redis } from "ioredis";
+import { cookieMaxAge } from "../config/cookie";
 import { redis } from "./redis";
 
 interface RedisStoreOptions {
@@ -17,7 +18,7 @@ export class RedisStore implements Store {
     options: RedisStoreOptions = {
       client: redis,
       prefix: "session:",
-      ttl: 86400,
+      ttl: cookieMaxAge,
     },
   ) {
     this.redisClient = options.client;

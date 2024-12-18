@@ -6,6 +6,7 @@
     "db:push": "turbo run db:push",
     "db:seed": "turbo run db:seed",
     "generate": "turbo run generate",
+    "studio": "pnpm --filter api studio",
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev",
@@ -22,6 +23,6 @@
   },
   "packageManager": "pnpm@8.15.6",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
