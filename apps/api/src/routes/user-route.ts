@@ -26,12 +26,7 @@ export const userRoute = app
         404,
       );
     }
-    return c.json(
-      {
-        user,
-      },
-      200,
-    );
+    return c.json(user, 200);
   })
   .get(
     "/sign-in",

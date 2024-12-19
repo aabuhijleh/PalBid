@@ -1,6 +1,6 @@
 import type { ClientRequestOptions } from "hono/client";
 
-const DEFAULT_TIMEOUT = 10000; // 10 seconds
+const DEFAULT_TIMEOUT = 9000; // 9 seconds
 
 const customFetch: typeof fetch = (
   url,

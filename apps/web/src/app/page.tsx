@@ -1,30 +1,28 @@
-import { env } from "#/config/env";
-import { getMe } from "#/lib/queries";
-import { Submit } from "#/components/submit";
+import { getListings } from "#/server/queries";
+import { ListingUploadButton } from "#/components/upload-button";
+import { ListingCard, ListingsGrid } from "#/components/listing";
 
-export default async function IndexPage() {
-  const currentUser = await getMe();
+export default async function Page() {
+  const listings = await getListings();
 
   return (
     <div>
-      <h1>Current user</h1>
-      <pre>{JSON.stringify(currentUser, null, 2)}</pre>
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold">Listings</h1>
+          <ListingUploadButton />
+        </div>
 
-      {currentUser ? (
-        <form
-          action={new URL("/users/sign-out", env.NEXT_PUBLIC_API_URL).href}
-          method="POST"
-        >
-          <Submit>Sign out</Submit>
-        </form>
-      ) : (
-        <form
-          action={new URL("/users/sign-in", env.NEXT_PUBLIC_API_URL).href}
-          method="GET"
-        >
-          <Submit>Sign in</Submit>
-        </form>
-      )}
+        {listings.length > 0 ? (
+          <ListingsGrid>
+            {listings.map((listing) => (
+              <ListingCard image={listing.image} key={listing.id} />
+            ))}
+          </ListingsGrid>
+        ) : (
+          <p className="mt-8 text-center text-gray-500">No listings found</p>
+        )}
+      </div>
     </div>
   );
 }

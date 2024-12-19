@@ -25,7 +25,7 @@
     "@hono/node-server": "^1.13.7",
     "@hono/oauth-providers": "^0.6.2",
     "@hono/zod-validator": "^0.4.2",
-    "@prisma/client": "^6.0.1",
+    "@prisma/client": "^6.1.0",
     "@types/dotenv-safe": "^8.1.6",
     "dotenv-safe": "^9.1.0",
     "env-var": "^7.5.0",
@@ -38,7 +38,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^20.11.24",
-    "prisma": "^6.0.1",
+    "prisma": "^6.1.0",
     "tsup": "^8.0.2",
     "tsx": "^4.19.2",
     "typescript": "5.5.4"

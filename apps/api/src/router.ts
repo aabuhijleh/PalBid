@@ -6,6 +6,7 @@ import { corsOptions } from "./config/cors";
 import { sessionOptions } from "./config/session";
 import type { ServerContext } from "./types/server";
 import { userRoute } from "./routes/user-route";
+import { listingRoute } from "./routes/listing-route";
 
 export const createRouter = () => {
   const app = new Hono<ServerContext>();
@@ -18,7 +19,8 @@ export const createRouter = () => {
     .get("/", (c) => {
       return c.text("Hello from PalBid API service 👋", 200);
     })
-    .route("/users", userRoute);
+    .route("/users", userRoute)
+    .route("/listings", listingRoute);
 
   return router;
 };
