@@ -1,14 +1,13 @@
-import { Hono } from "hono";
 import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
 import * as HttpStatusCodes from "stoker/http-status-codes";
-import type { AppBindings } from "../types/server";
 import { prisma } from "../database/client";
 import { authMiddleware } from "../middleware/auth";
+import { createRouter } from "../lib/create-app";
 
-const app = new Hono<AppBindings>();
+const router = createRouter();
 
-export const listingRoute = app
+export const listingRoute = router
   .get("/", async (c) => {
     const listings = await prisma.listing.findMany({
       include: {

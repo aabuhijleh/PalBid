@@ -1,16 +1,15 @@
-import { Hono } from "hono";
 import { googleAuth } from "@hono/oauth-providers/google";
 import { setCookie, deleteCookie } from "hono/cookie";
 import * as HttpStatusCodes from "stoker/http-status-codes";
-import type { AppBindings } from "../types/server";
 import { env } from "../config/env";
 import { prisma } from "../database/client";
 import { authMiddleware } from "../middleware/auth";
 import { cookieOptions } from "../config/cookie";
+import { createRouter } from "../lib/create-app";
 
-const app = new Hono<AppBindings>();
+const router = createRouter();
 
-export const userRoute = app
+export const userRoute = router
   .get("/me", authMiddleware, async (c) => {
     const session = c.get("session");
     const userId = session.get("userId");
