@@ -5,9 +5,11 @@ import { listingRoute } from "./routes/listing.route";
 
 const app = createApp();
 
-export default app
+const routedApp = app
   .route("/", indexRoute)
   .route("/users", userRoute)
   .route("/listings", listingRoute);
 
-export type AppType = typeof app;
+export default routedApp;
+
+export type AppType = typeof routedApp;
