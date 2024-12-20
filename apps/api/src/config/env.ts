@@ -4,6 +4,9 @@ import { get } from "env-var";
 config();
 
 export const env = {
+  NODE_ENV: get("NODE_ENV")
+    .default("development")
+    .asEnum(["development", "production"]),
   PORT: get("PORT").default("4000").asPortNumber(),
   API_URL: get("API_URL").required().asString(),
   WEB_URL: get("WEB_URL").required().asString(),

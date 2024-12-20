@@ -1,16 +1,15 @@
 import { createMiddleware } from "hono/factory";
-import type { ServerContext } from "../types/server";
+import * as HttpStatusCodes from "stoker/http-status-codes";
+import type { AppBindings } from "../types/server";
 
-export const authMiddleware = createMiddleware<ServerContext>(
-  async (c, next) => {
-    const session = c.get("session");
-    const userId = session.get("userId");
-    const isAuthenticated = Boolean(userId);
+export const authMiddleware = createMiddleware<AppBindings>(async (c, next) => {
+  const session = c.get("session");
+  const userId = session.get("userId");
+  const isAuthenticated = Boolean(userId);
 
-    if (!isAuthenticated) {
-      return c.json({ message: "Unauthorized" }, 401);
-    }
+  if (!isAuthenticated) {
+    return c.json({ message: "Unauthorized" }, HttpStatusCodes.UNAUTHORIZED);
+  }
 
-    await next();
-  },
-);
+  await next();
+});

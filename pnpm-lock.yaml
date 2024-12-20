@@ -29,6 +29,9 @@ importers:
       '@hono/oauth-providers':
         specifier: ^0.6.2
         version: 0.6.2(hono@4.6.13)
+      '@hono/zod-openapi':
+        specifier: ^0.18.3
+        version: 0.18.3(hono@4.6.13)(zod@3.24.1)
       '@hono/zod-validator':
         specifier: ^0.4.2
         version: 0.4.2(hono@4.6.13)(zod@3.24.1)
@@ -53,9 +56,15 @@ importers:
       ioredis:
         specifier: ^5.4.1
         version: 5.4.1
+      stoker:
+        specifier: ^1.4.2
+        version: 1.4.2(@asteasolutions/zod-to-openapi@7.3.0(zod@3.24.1))(@hono/zod-openapi@0.18.3(hono@4.6.13)(zod@3.24.1))(hono@4.6.13)(openapi3-ts@4.4.0)
       zod:
         specifier: ^3.24.1
         version: 3.24.1
+      zod-prisma-types:
+        specifier: ^3.2.1
+        version: 3.2.1(@prisma/client@6.1.0(prisma@6.1.0))(prisma@6.1.0)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -184,6 +193,11 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@asteasolutions/zod-to-openapi@7.3.0':
+    resolution: {integrity: sha512-7tE/r1gXwMIvGnXVUdIqUhCU1RevEFC4Jk6Bussa0fk1ecbnnINkZzj1EOAJyE/M3AI25DnHT/zKQL1/FPFi8Q==}
+    peerDependencies:
+      zod: ^3.20.2
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -543,6 +557,13 @@ packages:
     peerDependencies:
       hono: '>=3.*'
 
+  '@hono/zod-openapi@0.18.3':
+    resolution: {integrity: sha512-bNlRDODnp7P9Fs13ZPajEOt13G0XwXKfKRHMEFCphQsFiD1Y+twzHaglpNAhNcflzR1DQwHY92ZS06b4LTPbIQ==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      hono: '>=4.3.6'
+      zod: 3.*
+
   '@hono/zod-validator@0.4.2':
     resolution: {integrity: sha512-1rrlBg+EpDPhzOV4hT9pxr5+xDVmKuz6YJl+la7VCwK6ass5ldyKm5fD+umJdV2zhHD6jROoCCv8NbTwyfhT0g==}
     peerDependencies:
@@ -876,6 +897,9 @@ packages:
 
   '@prisma/fetch-engine@6.1.0':
     resolution: {integrity: sha512-asdFi7TvPlEZ8CzSZ/+Du5wZ27q6OJbRSXh+S8ISZguu+S9KtS/gP7NeXceZyb1Jv1SM1S5YfiCv+STDsG6rrg==}
+
+  '@prisma/generator-helper@6.1.0':
+    resolution: {integrity: sha512-drHaTKRmRsz6esHk2dpn7aPoxfttoqkYWSaI7zXsL5YQz73jww1YgJpGbPgOUiblriJAtdT4o7mibMqnf8TOsA==}
 
   '@prisma/get-platform@6.1.0':
     resolution: {integrity: sha512-ia8bNjboBoHkmKGGaWtqtlgQOhCi7+f85aOkPJKgNwWvYrT6l78KgojLekE8zMhVk0R9lWcifV0Pf8l3/15V0Q==}
@@ -1499,6 +1523,9 @@ packages:
   co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
+
+  code-block-writer@12.0.0:
+    resolution: {integrity: sha512-q4dMFMlXtKR3XNBHyMHt/3pwYNA69EDk00lloMOaaUMKPUXBw6lpXtbu3MMVG6/uOihGnRDOlkyqsONEUj60+w==}
 
   collect-v8-coverage@1.0.2:
     resolution: {integrity: sha512-lHl4d5/ONEbLlJvaJNtsF/Lz+WvB07u2ycqTYbdrq7UypDXailES4valYb2eWiJFxZlVmpGekfqoxQhzyFdT4Q==}
@@ -2807,6 +2834,9 @@ packages:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
 
+  openapi3-ts@4.4.0:
+    resolution: {integrity: sha512-9asTNB9IkKEzWMcHmVZE7Ts3kC9G7AFHfs8i7caD8HbI76gEjdkId4z/AkP83xdZsH7PLAnnbl47qZkXuxpArw==}
+
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
@@ -3277,6 +3307,17 @@ packages:
   standard-as-callback@2.1.0:
     resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
 
+  stoker@1.4.2:
+    resolution: {integrity: sha512-zna86ZzC3fnMOIkuO+1vRMfcRw7SpC/7yafRb0u8DwDVig2pPh6POVnGB7t2A5t/rMvyr7hE7tjXTPvW8bhJKg==}
+    peerDependencies:
+      '@asteasolutions/zod-to-openapi': ^7.0.0
+      '@hono/zod-openapi': '>=0.16.0'
+      hono: ^4.0.0
+      openapi3-ts: ^4.4.0
+    peerDependenciesMeta:
+      '@hono/zod-openapi':
+        optional: true
+
   stop-iteration-iterator@1.0.0:
     resolution: {integrity: sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==}
     engines: {node: '>= 0.4'}
@@ -3688,6 +3729,13 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod-prisma-types@3.2.1:
+    resolution: {integrity: sha512-qsOD8aMVx3Yg9gHctvhTRpavaJizt8xUda6qjwOcH7suvrirXax38tjs0ilKcY7GKbyY57q2rZ+uoSDnzVXpag==}
+    hasBin: true
+    peerDependencies:
+      '@prisma/client': ^4.x.x || ^5.x.x || ^6.x.x
+      prisma: ^4.x.x || ^5.x.x || ^6.x.x
+
   zod@3.24.1:
     resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
@@ -3699,6 +3747,11 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@asteasolutions/zod-to-openapi@7.3.0(zod@3.24.1)':
+    dependencies:
+      openapi3-ts: 4.4.0
+      zod: 3.24.1
 
   '@babel/code-frame@7.24.7':
     dependencies:
@@ -4041,6 +4094,13 @@ snapshots:
   '@hono/oauth-providers@0.6.2(hono@4.6.13)':
     dependencies:
       hono: 4.6.13
+
+  '@hono/zod-openapi@0.18.3(hono@4.6.13)(zod@3.24.1)':
+    dependencies:
+      '@asteasolutions/zod-to-openapi': 7.3.0(zod@3.24.1)
+      '@hono/zod-validator': 0.4.2(hono@4.6.13)(zod@3.24.1)
+      hono: 4.6.13
+      zod: 3.24.1
 
   '@hono/zod-validator@0.4.2(hono@4.6.13)(zod@3.24.1)':
     dependencies:
@@ -4437,6 +4497,10 @@ snapshots:
       '@prisma/debug': 6.1.0
       '@prisma/engines-version': 6.1.0-21.11f085a2012c0f4778414c8db2651556ee0ef959
       '@prisma/get-platform': 6.1.0
+
+  '@prisma/generator-helper@6.1.0':
+    dependencies:
+      '@prisma/debug': 6.1.0
 
   '@prisma/get-platform@6.1.0':
     dependencies:
@@ -5148,6 +5212,8 @@ snapshots:
 
   co@4.6.0:
     optional: true
+
+  code-block-writer@12.0.0: {}
 
   collect-v8-coverage@1.0.2:
     optional: true
@@ -6844,6 +6910,10 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
+  openapi3-ts@4.4.0:
+    dependencies:
+      yaml: 2.5.1
+
   optionator@0.9.4:
     dependencies:
       deep-is: 0.1.4
@@ -7290,6 +7360,14 @@ snapshots:
     optional: true
 
   standard-as-callback@2.1.0: {}
+
+  stoker@1.4.2(@asteasolutions/zod-to-openapi@7.3.0(zod@3.24.1))(@hono/zod-openapi@0.18.3(hono@4.6.13)(zod@3.24.1))(hono@4.6.13)(openapi3-ts@4.4.0):
+    dependencies:
+      '@asteasolutions/zod-to-openapi': 7.3.0(zod@3.24.1)
+      hono: 4.6.13
+      openapi3-ts: 4.4.0
+    optionalDependencies:
+      '@hono/zod-openapi': 0.18.3(hono@4.6.13)(zod@3.24.1)
 
   stop-iteration-iterator@1.0.0:
     dependencies:
@@ -7768,5 +7846,14 @@ snapshots:
     optional: true
 
   yocto-queue@0.1.0: {}
+
+  zod-prisma-types@3.2.1(@prisma/client@6.1.0(prisma@6.1.0))(prisma@6.1.0):
+    dependencies:
+      '@prisma/client': 6.1.0(prisma@6.1.0)
+      '@prisma/generator-helper': 6.1.0
+      code-block-writer: 12.0.0
+      lodash: 4.17.21
+      prisma: 6.1.0
+      zod: 3.24.1
 
   zod@3.24.1: {}

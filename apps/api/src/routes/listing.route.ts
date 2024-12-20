@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
-import type { ServerContext } from "../types/server";
+import * as HttpStatusCodes from "stoker/http-status-codes";
+import type { AppBindings } from "../types/server";
 import { prisma } from "../database/client";
 import { authMiddleware } from "../middleware/auth";
 
-const app = new Hono<ServerContext>();
+const app = new Hono<AppBindings>();
 
 export const listingRoute = app
   .get("/", async (c) => {
@@ -20,7 +21,7 @@ export const listingRoute = app
         },
       },
     });
-    return c.json(listings, 200);
+    return c.json(listings, HttpStatusCodes.OK);
   })
   .post(
     "/",
@@ -52,6 +53,6 @@ export const listingRoute = app
         },
       });
 
-      return c.json(listing, 201);
+      return c.json(listing, HttpStatusCodes.CREATED);
     },
   );

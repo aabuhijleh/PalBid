@@ -1,13 +1,14 @@
 import { Hono } from "hono";
 import { googleAuth } from "@hono/oauth-providers/google";
 import { setCookie, deleteCookie } from "hono/cookie";
-import type { ServerContext } from "../types/server";
+import * as HttpStatusCodes from "stoker/http-status-codes";
+import type { AppBindings } from "../types/server";
 import { env } from "../config/env";
 import { prisma } from "../database/client";
 import { authMiddleware } from "../middleware/auth";
 import { cookieOptions } from "../config/cookie";
 
-const app = new Hono<ServerContext>();
+const app = new Hono<AppBindings>();
 
 export const userRoute = app
   .get("/me", authMiddleware, async (c) => {
@@ -23,10 +24,10 @@ export const userRoute = app
         {
           message: "User not found",
         },
-        404,
+        HttpStatusCodes.NOT_FOUND,
       );
     }
-    return c.json(user, 200);
+    return c.json(user, HttpStatusCodes.OK);
   })
   .get(
     "/sign-in",

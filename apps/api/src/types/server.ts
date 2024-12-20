@@ -4,7 +4,7 @@ export interface SessionData {
   userId: string;
 }
 
-export interface ServerContext {
+export interface AppBindings {
   Variables: {
     session: Session<SessionData>;
     session_key_rotation: boolean;
