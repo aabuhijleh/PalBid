@@ -1,5 +1,5 @@
 import { hc } from "hono/client";
-import type { AppType } from "api/src";
+import type { AppType } from "api/src/app";
 import { env } from "#/config/env";
 import { commonOptions } from "#/config/fetch";
 
