@@ -6,7 +6,7 @@ export const cookieMaxAge = 60 * 60 * 24 * 7; // 7 days in seconds
 export const cookieOptions = {
   path: "/",
   httpOnly: true,
-  sameSite: "None",
+  sameSite: "Lax",
   secure: true,
   maxAge: cookieMaxAge,
   domain: env.COOKIE_DOMAIN,

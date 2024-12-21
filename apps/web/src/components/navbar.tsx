@@ -56,8 +56,6 @@ function UserAvatar({
   );
 }
 
-console.log("test");
-
 function SignInButton() {
   return (
     <form action={client.auth["sign-in"].google.$url().href} method="get">
