@@ -6,7 +6,7 @@ import { logger } from "hono/logger";
 import { sessionMiddleware as session } from "hono-sessions";
 import { corsOptions } from "../config/cors";
 import { sessionOptions } from "../config/session";
-import { emojiFavicon } from "../middleware/emoji-favicon";
+import { emojiFavicon } from "../middleware/emoji-favicon.middleware";
 import type { AppBindings } from "./types";
 
 export const createRouter = () => {

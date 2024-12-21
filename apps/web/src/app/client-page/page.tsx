@@ -1,6 +1,7 @@
 "use client";
 
 import useSWR from "swr";
+import { toast } from "sonner";
 import { UploadButton } from "#/components/uploadthing";
 import { getListings } from "#/lib/queries";
 import { authClient } from "#/lib/client-api-utils";
@@ -12,7 +13,7 @@ import {
 
 export default function ClientPage() {
   const {
-    data: listings,
+    data: listings = [],
     isLoading,
     mutate,
   } = useSWR("api-listings", getListings());
@@ -24,14 +25,31 @@ export default function ClientPage() {
         <UploadButton
           endpoint="imageUploader"
           onClientUploadComplete={async (responses) => {
-            const [res] = responses;
+            const toastId = toast("Creating listing...", {
+              duration: Infinity,
+            });
+
             const listingRes = await authClient.listings.$post({
               json: {
-                image: res.url,
+                image: responses[0].url,
               },
             });
+
+            toast.dismiss(toastId);
+
+            if (!listingRes.ok) {
+              toast("Failed to create listing. Please contact support.", {
+                duration: 5000,
+              });
+              return;
+            }
+
             const listing = await listingRes.json();
-            await mutate([...(listings || []), listing]);
+            await mutate([...listings, listing]);
+
+            toast("Listing has been created 🎉", {
+              duration: 2000,
+            });
           }}
           onUploadError={(uploadError) => {
             console.error(`ERROR! ${uploadError.message}`);
@@ -51,7 +69,7 @@ export default function ClientPage() {
           );
         }
 
-        if (listings && listings.length > 0) {
+        if (listings.length > 0) {
           return (
             <ListingsGrid>
               {listings.map((listing) => (

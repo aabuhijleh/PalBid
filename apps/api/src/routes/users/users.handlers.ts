@@ -1,9 +1,9 @@
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { prisma } from "../../database/client";
-import { authMiddleware } from "../../middleware/auth";
-import { createRouter } from "../../lib/create-app";
+import type { AppRouteHandler } from "../../lib/types";
+import type { MeRoute } from "./users.routes";
 
-const router = createRouter().get("/users/me", authMiddleware, async (c) => {
+export const me: AppRouteHandler<MeRoute> = async (c) => {
   const session = c.get("session");
   const userId = session.get("userId");
   const user = await prisma.user.findUnique({
@@ -20,6 +20,4 @@ const router = createRouter().get("/users/me", authMiddleware, async (c) => {
     );
   }
   return c.json(user, HttpStatusCodes.OK);
-});
-
-export default router;
+};

@@ -1,7 +1,9 @@
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { Navbar } from "#/components/navbar";
+import { Toaster } from "#/components/ui/sonner";
 import { ourFileRouter } from "./api/uploadthing/core";
+
 import "./styles.css";
 import "@uploadthing/react/styles.css";
 
@@ -24,6 +26,7 @@ export default function RootLayout({
         />
         <Navbar />
         <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   );
