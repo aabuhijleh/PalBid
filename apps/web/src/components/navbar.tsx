@@ -49,6 +49,7 @@ function UserAvatar({
           alt={user.name || "User avatar"}
           className="object-cover"
           fill
+          sizes="32px"
           src={user.avatar}
         />
       ) : null}

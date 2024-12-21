@@ -7,6 +7,7 @@ export function ListingCard({ image }: { image: string }) {
         alt="Listing image"
         className="object-cover transition-transform duration-300 group-hover:scale-110"
         fill
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         src={image}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
