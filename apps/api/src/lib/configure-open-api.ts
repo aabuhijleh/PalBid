@@ -1,14 +1,14 @@
 import { env } from "../config/env";
 import type { AppOpenAPI } from "./types";
 
-export default async function configureOpenAPI(app: AppOpenAPI) {
+const configureOpenAPI = async (app: AppOpenAPI) => {
   const { apiReference } = await import("@scalar/hono-api-reference"); // ESM module, needs to be imported dynamically
 
   app.doc("/doc", {
     openapi: "3.0.0",
     info: {
       version: "1.0.0",
-      title: "Tasks API",
+      title: "PalBid API",
     },
   });
 
@@ -23,4 +23,6 @@ export default async function configureOpenAPI(app: AppOpenAPI) {
       },
     }),
   );
-}
+};
+
+export default configureOpenAPI;

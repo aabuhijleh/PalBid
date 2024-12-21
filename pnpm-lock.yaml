@@ -32,18 +32,12 @@ importers:
       '@hono/zod-openapi':
         specifier: ^0.18.3
         version: 0.18.3(hono@4.6.13)(zod@3.24.1)
-      '@hono/zod-validator':
-        specifier: ^0.4.2
-        version: 0.4.2(hono@4.6.13)(zod@3.24.1)
       '@prisma/client':
         specifier: ^6.1.0
         version: 6.1.0(prisma@6.1.0)
       '@scalar/hono-api-reference':
         specifier: ^0.5.165
         version: 0.5.165(hono@4.6.13)
-      '@types/dotenv-safe':
-        specifier: ^8.1.6
-        version: 8.1.6
       dotenv-safe:
         specifier: ^9.1.0
         version: 9.1.0(dotenv@16.4.5)
@@ -65,9 +59,6 @@ importers:
       zod:
         specifier: ^3.24.1
         version: 3.24.1
-      zod-prisma-types:
-        specifier: ^3.2.1
-        version: 3.2.1(@prisma/client@6.1.0(prisma@6.1.0))(prisma@6.1.0)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -75,6 +66,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/config-typescript
+      '@types/dotenv-safe':
+        specifier: ^8.1.6
+        version: 8.1.6
       '@types/node':
         specifier: ^20.11.24
         version: 20.16.5
@@ -90,9 +84,15 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      zod-prisma-types:
+        specifier: ^3.2.1
+        version: 3.2.1(@prisma/client@6.1.0(prisma@6.1.0))(prisma@6.1.0)
 
   apps/web:
     dependencies:
+      '@icons-pack/react-simple-icons':
+        specifier: ^10.2.0
+        version: 10.2.0(react@19.0.0)
       '@radix-ui/react-avatar':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@19.0.2(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -585,6 +585,11 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
+
+  '@icons-pack/react-simple-icons@10.2.0':
+    resolution: {integrity: sha512-QDUxup8D3GdIIzwGpxQs6bjeFV5mJes25qqf4aqP/PaBYQNCar7AiyD8C14636TosCG0A/QqAUwm/Hviep4d4g==}
+    peerDependencies:
+      react: ^16.13 || ^17 || ^18 || ^19
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -4144,6 +4149,10 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/object-schema@2.0.3': {}
+
+  '@icons-pack/react-simple-icons@10.2.0(react@19.0.0)':
+    dependencies:
+      react: 19.0.0
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:

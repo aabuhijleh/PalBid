@@ -1,12 +1,10 @@
 import { createRoute, z } from "@hono/zod-openapi";
 import * as HttpStatusCodes from "stoker/http-status-codes";
-import { prisma } from "../database/client";
-import { authMiddleware } from "../middleware/auth";
-import { createRouter } from "../lib/create-app";
-import { ListingSchema, UserSchema } from "../database/prisma/generated/zod";
-import type { AppRouteHandler } from "../lib/types";
-
-const router = createRouter();
+import { prisma } from "../../database/client";
+import { authMiddleware } from "../../middleware/auth";
+import { createRouter } from "../../lib/create-app";
+import { ListingSchema, UserSchema } from "../../database/prisma/generated/zod";
+import type { AppRouteHandler } from "../../lib/types";
 
 const CreateListingSchema = z.object({
   image: z.string().url("Invalid image URL"),
@@ -14,7 +12,7 @@ const CreateListingSchema = z.object({
 
 const createListingRoute = createRoute({
   middleware: [authMiddleware] as const,
-  path: "/",
+  path: "/listings",
   method: "post",
   tags: ["Listings"],
   description: "Create a new listing",
@@ -73,10 +71,10 @@ const ListingWithUserSchema = ListingSchema.extend({
   }),
 });
 
-export const listingRoute = router
+const router = createRouter()
   .openapi(
     createRoute({
-      path: "/",
+      path: "/listings",
       method: "get",
       tags: ["Listings"],
       description: "Get all listings",
@@ -107,3 +105,5 @@ export const listingRoute = router
     },
   )
   .openapi(createListingRoute, createListing);
+
+export default router;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { env } from "#/config/env";
 import { getMe } from "#/server/queries";
+import { client } from "#/server/server-api-utils";
 
 export async function Navbar() {
   const currentUser = await getMe();
@@ -56,14 +56,13 @@ function UserAvatar({
   );
 }
 
+console.log("test");
+
 function SignInButton() {
   return (
-    <form
-      action={new URL("/users/sign-in", env.NEXT_PUBLIC_API_URL).href}
-      method="get"
-    >
+    <form action={client.auth["sign-in"].google.$url().href} method="get">
       <button
-        className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        className="flex items-center gap-2 rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700"
         type="submit"
       >
         Sign in
@@ -74,10 +73,7 @@ function SignInButton() {
 
 function SignOutButton() {
   return (
-    <form
-      action={new URL("/users/sign-out", env.NEXT_PUBLIC_API_URL).href}
-      method="post"
-    >
+    <form action={client.auth["sign-out"].$url().href} method="post">
       <button
         className="rounded-md bg-gray-100 px-3 py-2 text-sm font-medium hover:bg-gray-200"
         type="submit"

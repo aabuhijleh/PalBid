@@ -1,18 +1,20 @@
-import { createApp } from "./lib/create-app";
-import { indexRoute } from "./routes/index.route";
-import { userRoute } from "./routes/user.route";
-import { listingRoute } from "./routes/listing.route";
+import createApp from "./lib/create-app";
 import configureOpenAPI from "./lib/configure-open-api";
+import index from "./routes/index.route";
+import auth from "./routes/auth/auth.index";
+import users from "./routes/users/users.route";
+import listings from "./routes/listings/listings.route";
 
 const app = createApp();
 
 void configureOpenAPI(app);
 
-const routedApp = app
-  .route("/", indexRoute)
-  .route("/users", userRoute)
-  .route("/listings", listingRoute);
+const routes = [index, auth, users, listings] as const;
 
-export default routedApp;
+routes.forEach((route) => {
+  app.route("/", route);
+});
 
-export type AppType = typeof routedApp;
+export type AppType = (typeof routes)[number];
+
+export default app;

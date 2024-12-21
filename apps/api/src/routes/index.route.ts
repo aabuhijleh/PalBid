@@ -1,26 +1,19 @@
-import { createRoute, z } from "@hono/zod-openapi";
+import { createRoute } from "@hono/zod-openapi";
 import * as HttpStatusCodes from "stoker/http-status-codes";
+import { jsonContent } from "stoker/openapi/helpers";
+import { createMessageObjectSchema } from "stoker/openapi/schemas";
 import { createRouter } from "../lib/create-app";
 
-const router = createRouter();
-
-export const indexRoute = router.openapi(
+const router = createRouter().openapi(
   createRoute({
     path: "/",
     tags: ["Index"],
-    description: "Index route",
     method: "get",
     responses: {
-      [HttpStatusCodes.OK]: {
-        content: {
-          "application/json": {
-            schema: z.object({
-              message: z.string(),
-            }),
-          },
-        },
-        description: "Index route",
-      },
+      [HttpStatusCodes.OK]: jsonContent(
+        createMessageObjectSchema("Hello from PalBid API service 👋"),
+        "PalBid API Index route",
+      ),
     },
   }),
   (c) => {
@@ -30,3 +23,5 @@ export const indexRoute = router.openapi(
     );
   },
 );
+
+export default router;

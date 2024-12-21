@@ -16,7 +16,7 @@ export const createRouter = () => {
   });
 };
 
-export const createApp = () => {
+const createApp = () => {
   const app = createRouter();
 
   app.use(logger());
@@ -28,3 +28,5 @@ export const createApp = () => {
 
   return app;
 };
+
+export default createApp;
